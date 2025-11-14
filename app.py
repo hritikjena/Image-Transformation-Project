@@ -99,7 +99,7 @@ if uploaded_file:
         st.write("")  # spacing
         st.write("")  # spacing
         st.write("")  # spacing
-        if st.button("🎨 Convert to Grayscale"):
+        if st.button("Convert to Grayscale"):
             img_np = np.array(image.convert("RGB"))
             gray = cv2.cvtColor(img_np, cv2.COLOR_RGB2GRAY)
             h, w = gray.shape
@@ -138,10 +138,8 @@ if uploaded_file:
 
             with colA:
                 st.image(gray_resized, caption="Original", clamp=True, width=450)
-                st.write(f"**Image Shape:** {st.session_state.gray_resized.shape}")
             with colB:
                 st.image(rotated, caption=f"Rotated ({angle}°)", clamp=True, width=450)
-                st.write(f"**Image Shape:** {st.session_state.gray_resized.shape}")
 
         # SCALING (with separate X and Y sliders)
         elif choice == "Scaling":
@@ -151,10 +149,8 @@ if uploaded_file:
 
             with colA:
                 st.image(gray_resized, caption="Original", clamp=True, width=450)
-                st.write(f"**Image Shape:** {st.session_state.gray_resized.shape}")
             with colB:
                 st.image(scaled, caption=f"Scaled (X={sx}, Y={sy})", clamp=True, width=450)
-                st.write(f"**Image Shape:** {st.session_state.gray_resized.shape}")
 
         # TRANSLATION
         elif choice == "Translation":
@@ -165,12 +161,11 @@ if uploaded_file:
 
             with colA:
                 st.image(gray_resized, caption="Original", clamp=True, width=450)
-                st.write(f"**Image Shape:** {st.session_state.gray_resized.shape}")
             with colB:
                 st.image(translated, caption=f"Translated (X={tx}, Y={ty})", clamp=True, width=450)
-                st.write(f"**Image Shape:** {st.session_state.gray_resized.shape}")
 
 else:
 
     st.info("📤 Upload an image to begin transforming it!")
+
 
