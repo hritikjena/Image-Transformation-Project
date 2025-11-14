@@ -1,7 +1,7 @@
 import streamlit as st
 import numpy as np
 import cv2
-from PIL import Image
+from PIL import Image, ImageOps
 import pillow_heif
 
 # Page Setup
@@ -80,8 +80,10 @@ if uploaded_file:
     if filename.endswith(".heic"):
         heif_file = pillow_heif.read_heif(uploaded_file.read())
         image = Image.frombytes(heif_file.mode, heif_file.size, heif_file.data)
+        image = ImageOps.exif_transpose(image)
     else:
         image = Image.open(uploaded_file)
+        image = ImageOps.exif_transpose(image)
 
     st.session_state.original_image = image
 
@@ -161,4 +163,5 @@ if uploaded_file:
                 st.image(translated, caption=f"Translated (X={tx}, Y={ty})", clamp=True, width=450)
 
 else:
+
     st.info("📤 Upload an image to begin transforming it!")
